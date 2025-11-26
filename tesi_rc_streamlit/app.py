@@ -344,6 +344,14 @@ else:
     ax2.set_ylabel("D [kg/m^3]")
     ax2.set_zlabel("RC [MPa]")
 
+    # Etichetta 2D aggiuntiva per rendere evidente l'asse verticale (RC)
+    ax2.text2D(
+    0.85, 0.90,
+    "RC [MPa]",
+    transform=ax2.transAxes,
+    fontsize=9
+    )
+
     buf = io.BytesIO()
     fig.savefig(buf, format="png", bbox_inches="tight")
     buf.seek(0)
