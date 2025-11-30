@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler, PolynomialFeatures
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 import matplotlib.pyplot as plt
 import io  # per il buffer immagini
 from mpl_toolkits.mplot3d import Axes3D  # necessario per la superficie 3D
@@ -256,17 +256,17 @@ else:
 
     affidabilita = calcola_affidabilita_poly(y_pred, valore_IT, valore_D)
 
-    # --- Metriche sul train per il modello polinomiale (valutate su RC) ---
+  # --- Metriche sul train per il modello polinomiale (valutate su RC) ---
     y_train_log_pred = model.predict(X_train)
     y_train_pred_poly = np.exp(y_train_log_pred)
     mae_poly = mean_absolute_error(y_train, y_train_pred_poly)
-    rmse_poly = np.sqrt(mean_squared_error(y_train, y_train_pred_poly))
-    r2_poly = r2_score(y_train, y_train_pred_poly)
+    mse_poly = mean_squared_error(y_train, y_train_pred_poly)
+    rmse_poly = np.sqrt(mse_poly)
 
     with col.expander("Metriche sul set di addestramento"):
         st.write(f"MAE: {mae_poly:.2f}")
+        st.write(f"MSE: {mse_poly:.2f}")
         st.write(f"RMSE: {rmse_poly:.2f}")
-        st.write(f"R^2: {r2_poly:.3f}")
 
     col.markdown("### Parametri e predizione")
     col.markdown(f"**IT selezionato:** {valore_IT:.2f} s")
