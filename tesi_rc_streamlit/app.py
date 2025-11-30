@@ -177,13 +177,13 @@ if modello_scelto == "Random Forest":
     # Metriche interne (le teniamo nell'expander)
     y_train_pred = rf_model.predict(X_train)
     mae = mean_absolute_error(y_train, y_train_pred)
-    rmse = np.sqrt(mean_squared_error(y_train, y_train_pred))
-    r2 = r2_score(y_train, y_train_pred)
+    mse = mean_squared_error(y_train, y_train_pred)
+    rmse = np.sqrt(mse)
 
     with col.expander("Metriche sul set di addestramento"):
         st.write(f"MAE: {mae:.2f}")
+        st.write(f"MSE: {mse:.2f}")
         st.write(f"RMSE: {rmse:.2f}")
-        st.write(f"R^2: {r2:.3f}")
 
     # === PARAMETRI E PREVISIONE (SOLO RC PREVISTO) ===
     col.markdown("### Parametri e predizione")
